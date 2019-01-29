@@ -7,10 +7,33 @@ import { setDialogIsOpen } from 'rmw-shell/lib/store/dialogs/actions'
 import { withRouter } from 'react-router-dom'
 import { withTheme } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
-
+var slideIndex = 1;
 class ProductList extends Component {
-  render() {
+    constructor(props) {
+        super(props);
+        this.state = {layout: 'list'}
+      }
+    setLayout= (layout)=>{
+        this.setState({
+            layout:layout
+        })
+    }
 
+ plusDivs=(n,name)=> {
+  this.showDivs(slideIndex += n,name);
+}
+
+ showDivs=(n,name)=> {
+  var i;
+  var x = document.getElementsByClassName(name);
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  x[slideIndex-1].style.display = "block";  
+}
+  render() {
     return (
         <div className="container">
         <div className="row fullwidth-layout">
@@ -40,21 +63,21 @@ class ProductList extends Component {
                     <div className="col-md-6">
                         {/* <!-- Layout Switcher --> */}
                         <div className="layout-switcher">
-                            <a href="#" className="list"><i className="fa fa-th-list"></i></a>
-                            <a href="#" className="grid"><i className="fa fa-th-large"></i></a>
-                            <a href="#" className="grid-three"><i className="fa fa-th"></i></a>
+                            <a  onClick={()=>this.setLayout("list")} className={this.state.layout === "list"?"list active":"list"}><i className="fa fa-th-list"></i></a>
+                            <a onClick={()=>this.setLayout("grid")} className={this.state.layout === "grid"?"grid active":"grid"}><i className="fa fa-th-large"></i></a>
+                            <a onClick={()=>this.setLayout("grid-three")} className={this.state.layout === "grid-three"?"grid-three active":"grid-three"}><i className="fa fa-th"></i></a>
                         </div>
                     </div>
                 </div>
 
 
                 {/* <!-- Listings --> */}
-                <div className="listings-container list-layout">
+                <div className={`listings-container ${this.state.layout}-layout`}>
 
                     {/* <!-- Listing Item --> */}
                     <div className="listing-item">
 
-                        <a href="property-page.html" className="listing-img-container">
+                        <a className="listing-img-container">
 
                             <div className="listing-badges">
                                 <span className="featured">Featured</span>
@@ -69,9 +92,11 @@ class ProductList extends Component {
                             </div>
 
                             <div className="listing-carousel">
-                                <div><img src={require("../../assets/images/listing-01.jpg")} alt=""/></div>
-                                <div><img src={require("../../assets/images/listing-01b.jpg")} alt=""/></div>
-                                <div><img src={require("../../assets/images/listing-01c.jpg")} alt=""/></div>
+                                <div  className="images_Eagle_Apartments"><img src={require("../../assets/images/listing-01.jpg")} alt=""/></div>
+                                <div  className="images_Eagle_Apartments"><img src={require("../../assets/images/listing-01b.jpg")} alt=""/></div>
+                                <div  className="images_Eagle_Apartments"><img src={require("../../assets/images/listing-01c.jpg")} alt=""/></div>
+                                <div className="newSlideButtonLeft" onClick={()=>this.plusDivs(-1,'images_Eagle_Apartments')}>&#10094;</div>
+                                <div className="newSlideButtonRight"  onClick={()=>this.plusDivs(1,'images_Eagle_Apartments')}>&#10095;</div>
                             </div>
                         </a>
 
@@ -224,8 +249,7 @@ class ProductList extends Component {
                             </div>
 
                             <div className="listing-carousel">
-                                <div><img src={require("../../assets/images/listing-04.jpg")} alt=""/></div>
-                                <div><img src={require("../../assets/images/listing-04b.jpg")} alt=""/></div>
+                                <div><img className="Images_Selway_Apartments" src={require("../../assets/images/listing-04.jpg")} alt=""/></div>
                             </div>
 
                         </a>

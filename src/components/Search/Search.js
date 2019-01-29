@@ -9,6 +9,14 @@ import { withTheme } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 
 class SearchTool extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {showMore: false}
+      }
+      toggle = ()=> {
+        this.setState({showMore: !this.state.showMore});
+      }
+     
   render() {
 
     return (
@@ -201,8 +209,8 @@ class SearchTool extends Component {
 
 
                         {/* <!-- More Search Options --> */}
-                        <a href="#" className="more-search-options-trigger margin-top-10" data-open-title="More Options" data-close-title="Less Options"></a>
-                        <div className="more-search-options relative">
+                        <a onClick={()=>this.toggle()} className="more-search-options-trigger margin-top-10" data-open-title={this.state.showMore?'Less Options':'More Options'} ></a>
+                        <div className="more-search-options relative" style={this.state.showMore?{display:'Block'}:{}}>
                             <div className="more-search-options-container">
                                 {/* <!-- Row With Forms --> */}
                                 <div className="row with-forms">
