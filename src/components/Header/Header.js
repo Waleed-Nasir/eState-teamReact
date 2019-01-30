@@ -202,7 +202,7 @@ class Header extends Component {
                             <div className="right-side">
                                 {/* <!-- Header Widget --> */}
                                 <div className="header-widget">
-                                    <a href="login-register.html" className="sign-in"><i className="fa fa-user"></i> Log In / Register</a>
+                                    <a href="login-register.html" className="sign-in"><i class="fa fa-sign-out"></i> Log In / Register</a>
                                     <a href="submit-property.html" className="button border">Submit Property</a>
                                 </div>
                                 {/* <!-- Header Widget / End --> */}

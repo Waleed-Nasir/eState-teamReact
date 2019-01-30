@@ -11,7 +11,7 @@ var slideIndex = 1;
 class ProductList extends Component {
     constructor(props) {
         super(props);
-        this.state = {layout: 'list'}
+        this.state = {layout: 'list-layout',showCom:false}
       }
     setLayout= (layout)=>{
         this.setState({
@@ -22,7 +22,9 @@ class ProductList extends Component {
  plusDivs=(n,name)=> {
   this.showDivs(slideIndex += n,name);
 }
-
+showCompare= (layout)=>{
+    this.setState({showCom: !this.state.showCom});
+}
  showDivs=(n,name)=> {
   var i;
   var x = document.getElementsByClassName(name);
@@ -36,6 +38,67 @@ class ProductList extends Component {
   render() {
     return (
         <div className="container">
+          <div className={`compare-slide-menu${this.state.showCom?' active':''}`}>
+            
+                    <div className="csm-trigger" onClick={()=>this.showCompare()}></div>
+            
+                    <div className="csm-content">
+                        <h4>Compare Properties
+                            <div className="csm-mobile-trigger" onClick={()=>this.showCompare()}></div>
+                        </h4>
+            
+                        <div className="csm-properties">
+            
+                            {/* <!-- Property --> */}
+                            <div className="listing-item compact">
+                                <a href="unused/single-property-page-2.html" className="listing-img-container">
+                                    <div className="remove-from-compare"><i className="fa fa-close"></i></div>
+                                    <div className="listing-badges">
+                                        <span>For Sale</span>
+                                    </div>
+                                    <div className="listing-img-content">
+                                        <span className="listing-compact-title">Eagle Apartments <i>$420,000</i></span>
+                                    </div>
+                                    <img src={require("../../assets/images/listing-01.jpg")} alt=""/>
+                                </a>
+                            </div>
+            
+                            {/* <!-- Property --> */}
+                            <div className="listing-item compact">
+                                <a href="unused/single-property-page-2.html" className="listing-img-container">
+                                    <div className="remove-from-compare"><i className="fa fa-close"></i></div>
+                                    <div className="listing-badges">
+                                        <span>For Sale</span>
+                                    </div>
+                                    <div className="listing-img-content">
+                                        <span className="listing-compact-title">Selway Apartments <i>$420,000</i></span>
+                                    </div>
+                                    <img src="images/listing-03.jpg" alt=""/>
+                                </a>
+                            </div>
+            
+                            {/* <!-- Property --> */}
+                            <div className="listing-item compact">
+                                <a href="unused/single-property-page-2.html" className="listing-img-container">
+                                    <div className="remove-from-compare"><i className="fa fa-close"></i></div>
+                                    <div className="listing-badges">
+                                        <span>For Sale</span>
+                                    </div>
+                                    <div className="listing-img-content">
+                                        <span className="listing-compact-title">Oak Tree Villas <i>$535,000</i></span>
+                                    </div>
+                                    <img src="images/listing-05.jpg" alt=""/>
+                                </a>
+                            </div>
+            
+                        </div>
+            
+                        <div className="csm-buttons">
+                            <a href="compare.html" className="button">Compare</a>
+                            <a href="#" className="button reset">Reset</a>
+                        </div>
+                    </div>
+                    </div>
         <div className="row fullwidth-layout">
 
             <div className="col-md-12">
@@ -63,16 +126,16 @@ class ProductList extends Component {
                     <div className="col-md-6">
                         {/* <!-- Layout Switcher --> */}
                         <div className="layout-switcher">
-                            <a  onClick={()=>this.setLayout("list")} className={this.state.layout === "list"?"list active":"list"}><i className="fa fa-th-list"></i></a>
-                            <a onClick={()=>this.setLayout("grid")} className={this.state.layout === "grid"?"grid active":"grid"}><i className="fa fa-th-large"></i></a>
-                            <a onClick={()=>this.setLayout("grid-three")} className={this.state.layout === "grid-three"?"grid-three active":"grid-three"}><i className="fa fa-th"></i></a>
+                            <a  onClick={()=>this.setLayout("list-layout")} className={this.state.layout === "list-layout"?"list active":"list"}><i className="fa fa-th-list"></i></a>
+                            <a onClick={()=>this.setLayout("grid-layout")} className={this.state.layout === "grid-layout"?"grid active":"grid"}><i className="fa fa-th-large"></i></a>
+                            <a onClick={()=>this.setLayout("grid-layout-three")} className={this.state.layout === "grid-layout-three"?"grid-three active":"grid-three"}><i className="fa fa-th"></i></a>
                         </div>
                     </div>
                 </div>
 
 
                 {/* <!-- Listings --> */}
-                <div className={`listings-container ${this.state.layout}-layout`}>
+                <div className={`listings-container ${this.state.layout}`}>
 
                     {/* <!-- Listing Item --> */}
                     <div className="listing-item">
@@ -93,8 +156,8 @@ class ProductList extends Component {
 
                             <div className="listing-carousel">
                                 <div  className="images_Eagle_Apartments"><img src={require("../../assets/images/listing-01.jpg")} alt=""/></div>
-                                <div  className="images_Eagle_Apartments"><img src={require("../../assets/images/listing-01b.jpg")} alt=""/></div>
-                                <div  className="images_Eagle_Apartments"><img src={require("../../assets/images/listing-01c.jpg")} alt=""/></div>
+                                <div  className="images_Eagle_Apartments" style={{display:'none'}}><img src={require("../../assets/images/listing-01b.jpg")} alt=""/></div>
+                                <div  className="images_Eagle_Apartments" style={{display:'none'}}><img src={require("../../assets/images/listing-01c.jpg")} alt=""/></div>
                                 <div className="newSlideButtonLeft" onClick={()=>this.plusDivs(-1,'images_Eagle_Apartments')}>&#10094;</div>
                                 <div className="newSlideButtonRight"  onClick={()=>this.plusDivs(1,'images_Eagle_Apartments')}>&#10095;</div>
                             </div>
